@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--Parent Layout-->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.MainActivity"
+    android:background="@color/landing_background">
+
+    <!-- Layout for the Dashboard part   -->
+    <RelativeLayout
+        android:id="@+id/Dashboard"
+        android:layout_width="match_parent"
+        android:layout_height="350dp"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/landing_background"
+        android:paddingHorizontal="30dp"
+        android:paddingTop="44dp"
+        >
+
+        <!-- Layout including the header with, text, analytics, and profile     -->
+        <RelativeLayout
+            android:id="@+id/dashboardLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:fontFamily="@font/open_sans_extrabold"
+                android:text="@string/landing_dashboard"
+                android:textColor="@color/app_primary"
+                android:textSize="20sp"
+                android:autoSizeMaxTextSize="30sp"
+                android:gravity="center" />
+
+
+            <Button
+                android:id="@+id/profileButton"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerInParent="true"
+                android:background="@drawable/button_landing_profile"
+                />
+
+        </RelativeLayout>
+
+        <!-- Layout including toggle button and amount      -->
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/dashboardLayout"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="45dp">
+
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/switch_landing"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:switchMinWidth="250dp"
+                android:layout_centerHorizontal="true"
+                app:trackTint="@color/app_background"
+                app:thumbTint="@color/app_primary"
+                android:thumb="@drawable/switch_thumb_landing"
+                app:track="@drawable/switch_track_landing"
+                app:showText="true"
+                android:textOff="Total"
+                android:textOn="Remaining"
+                />
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="55dp">
+
+                    <TextView
+                        android:id="@+id/dollar_amount_landing"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="70sp"
+                        android:textColor="@color/app_primary"
+                        android:fontFamily="@font/open_sans_regular"
+                        android:text="\$"
+                        />
+                    <TextView
+                        android:id="@+id/amount_amount_landing"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="70sp"
+                        android:textColor="@color/app_primary"
+                        android:fontFamily="@font/open_sans_regular"
+                        android:text="360"
+                        android:layout_toRightOf="@id/dollar_amount_landing"
+                        />
+                    <TextView
+                        android:id="@+id/fraction_amount_amount_landing"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="50sp"
+                        android:textColor="@color/app_primary"
+                        android:fontFamily="@font/open_sans_regular"
+                        android:text=".25"
+                        android:layout_toRightOf="@id/amount_amount_landing"
+                        android:layout_alignBaseline="@id/dollar_amount_landing"
+                        />
+            </RelativeLayout>
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <!--  Layout for analytics -->
+    <FrameLayout
+        android:id="@+id/flFragment"
+        android:layout_width="match_parent"
+        android:layout_height="460dp"
+        android:background="@drawable/fragment_background"
+        android:layout_alignParentBottom="true"
+        android:layout_above="@id/bottom_nav"
+        >
+
+    </FrameLayout>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_nav"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_alignParentBottom="true"
+        app:menu="@menu/bottom_nav"
+        android:background="@drawable/nav_background"
+        app:labelVisibilityMode="unlabeled"
+        app:itemIconSize="35dp"
+        android:paddingTop="10dp"/>
+
+</RelativeLayout>

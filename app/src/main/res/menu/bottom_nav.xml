@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+
+        android:id="@+id/nav_recent"
+        android:icon="@drawable/button_recent"
+        android:title="@string/nav_recent"
+        />
+    <item
+        android:id="@+id/nav_add"
+        android:icon="@drawable/button_add"
+        android:title="@string/nav_new"
+        />
+    <item
+        android:id="@+id/nav_analytics"
+        android:icon="@drawable/button_analytics"
+        android:title="@string/nav_analytics"
+        />
+</menu>

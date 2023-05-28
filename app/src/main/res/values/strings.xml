@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Wise Wallet</string>
+    <string name="landing_dashboard">Dashboard</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="nav_analytics">Analytics</string>
+    <string name="nav_new">New</string>
+    <string name="nav_recent">Activity</string>
+    <string name="sign_in"><u>Sign In</u></string>
+</resources>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardElevation="30dp">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginVertical="10dp"
+        android:layout_gravity="center_vertical"
+        android:layout_marginHorizontal="30dp">
+
+        <TextView
+            android:id="@+id/analytics_merchant"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Merchant"
+            android:textSize="20sp"
+            android:textColor="@color/app_primary"
+            android:fontFamily="@font/open_sans_bold" />
+        <TextView
+            android:id="@+id/recent_dollar_amount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:text="$Amount"
+            android:fontFamily="@font/open_sans_regular"
+            android:textSize="20sp"
+            android:layout_alignBaseline="@id/analytics_merchant" />
+
+        <TextView
+            android:id="@+id/analytics_category"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/analytics_merchant"
+            android:textColor="@color/app_foreground"
+            android:textSize="17sp"
+            android:fontFamily="@font/open_sans_regular"
+            android:text="Category"
+            android:layout_marginTop="2dp"/>
+        <TextView
+            android:id="@+id/recent_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/recent_dollar_amount"
+            android:layout_alignBaseline="@id/analytics_category"
+            android:layout_alignParentEnd="true"
+            android:textColor="@color/app_foreground"
+            android:fontFamily="@font/open_sans_regular"
+            android:textSize="16sp"
+            android:text="1/2/2000" />
+
+
+
+
+    </RelativeLayout>
+
+
+</androidx.cardview.widget.CardView>
