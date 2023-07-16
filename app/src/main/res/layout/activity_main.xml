@@ -57,31 +57,30 @@
             android:layout_centerInParent="true"
             android:layout_marginTop="45dp">
 
-            <androidx.appcompat.widget.SwitchCompat
-                android:id="@+id/switch_landing"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:switchMinWidth="250dp"
+            <Button
+                android:id="@+id/toggleButton"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
                 android:layout_centerHorizontal="true"
-                app:trackTint="@color/app_background"
-                app:thumbTint="@color/app_primary"
-                android:thumb="@drawable/switch_thumb_landing"
-                app:track="@drawable/switch_track_landing"
-                app:showText="true"
-                android:textOff="Total"
-                android:textOn="Remaining"
+                android:text="Remaining Balance"
+                android:fontFamily="@font/open_sans_bold"
+                android:textSize="15dp"
+                android:background="@drawable/sign_in_button"
+
                 />
                 <RelativeLayout
+                    android:id="@+id/balanceText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
-                    android:layout_marginTop="55dp">
+                    android:layout_marginTop="80dp"
+                    >
 
                     <TextView
                         android:id="@+id/dollar_amount_landing"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="70sp"
+                        android:textSize="60sp"
                         android:textColor="@color/app_primary"
                         android:fontFamily="@font/open_sans_regular"
                         android:text="\$"
@@ -90,10 +89,11 @@
                         android:id="@+id/amount_amount_landing"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="70sp"
+                        android:textSize="60sp"
+                        android:layout_alignBaseline="@id/dollar_amount_landing"
                         android:textColor="@color/app_primary"
                         android:fontFamily="@font/open_sans_regular"
-                        android:text="360"
+                        android:text="@string/amount_landing"
                         android:layout_toRightOf="@id/dollar_amount_landing"
                         />
                     <TextView

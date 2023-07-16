@@ -1,8 +1,5 @@
 package com.example.wisewallet.activities;
 
-import android.content.ClipData;
-import android.content.ClipboardManager;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -11,10 +8,15 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.wisewallet.R;
+import com.example.wisewallet.authentication.IsAuthenticated;
 import com.example.wisewallet.authentication.SignActivity;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -24,6 +26,18 @@ public class ProfileActivity extends AppCompatActivity {
     final FirebaseAuth userAuth = FirebaseAuth.getInstance();
     FirebaseUser firebaseUser = userAuth.getCurrentUser();
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        IsAuthenticated isAuthenticated = new IsAuthenticated(this);
+        boolean isUserAuthenticated = isAuthenticated.checkAuthentication();
+
+        if (!isUserAuthenticated) {
+            isAuthenticated.redirectToLoginScreen();
+            finish();
+        }
+    }
 
 
     @Override
@@ -35,14 +49,7 @@ public class ProfileActivity extends AppCompatActivity {
         RelativeLayout budgetButton = findViewById(R.id.budget_layout);
         budgetButton.setOnClickListener(budgetListener);
 
-//      username copy
 
-        TextView username = findViewById(R.id.profile_userName);
-        username.setOnLongClickListener(usernameCopy);
-
-//      Personal Info Edit
-        Button editPersonalInfo = findViewById(R.id.personal_info_edit);
-        editPersonalInfo.setOnClickListener(editPersonalInfoListener);
 
         TextView profileName = findViewById(R.id.profile_profileName);
         TextView userName = findViewById(R.id.profile_name_changeable);
@@ -55,7 +62,43 @@ public class ProfileActivity extends AppCompatActivity {
         Button logOutButton = findViewById(R.id.log_out_button);
         logOutButton.setOnClickListener(logOutListener);
 
+
+        //Password Reset
+        TextView resetQuestion = findViewById(R.id.updatePassword);
+        resetQuestion.setOnClickListener(resetPasswordListener);
+
     }
+
+    private final View.OnClickListener resetPasswordListener =
+            new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    userAuth.sendPasswordResetEmail(firebaseUser.getEmail())
+                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if (task.isSuccessful()) {
+                                        Toast.makeText(ProfileActivity.this, "Reset Link Sent", Toast.LENGTH_LONG).show();
+                                        userAuth.signOut();
+                                        if(userAuth.getCurrentUser() == null){
+                                            Intent logoutIntent = new Intent(getApplicationContext(), SignActivity.class);
+                                            startActivity(logoutIntent);
+                                        }
+                                    }
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_SHORT).show();
+                                }
+                            });
+
+
+                }
+            };
+
+
+
 
 private final View.OnClickListener budgetListener =
         new View.OnClickListener() {
@@ -80,28 +123,6 @@ private final View.OnClickListener budgetListener =
             }
         };
 
-
-private final View.OnLongClickListener usernameCopy =
-        new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View view) {
-                ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
-                ClipData usernameClip = ClipData.newPlainText("Username", ((TextView)findViewById(R.id.profile_userName)).getText());
-                clipboard.setPrimaryClip(usernameClip);
-
-                Toast.makeText(ProfileActivity.this, "Username Copied", Toast.LENGTH_SHORT).show();
-                return true;
-            }
-        };
-
-private final View.OnClickListener editPersonalInfoListener =
-        new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                      Intent editPersonalInfoIntent = new Intent(ProfileActivity.this, EditPersonalInfoActivity.class);
-                      startActivity(editPersonalInfoIntent);
-            }
-        };
 
 
 

@@ -33,16 +33,6 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
         android:textColor="@color/app_primary"/>
-    <TextView
-        android:id="@+id/profile_userName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/profile_profileName"
-        android:textColor="@color/app_foreground"
-        android:textSize="17sp"
-        android:fontFamily="@font/open_sans_regular"
-        android:text="\@username"
-        android:layout_alignLeft="@id/profile_profileName"/>
 
 
     <TextView
@@ -51,7 +41,7 @@
         android:layout_height="wrap_content"
         android:text="USAGE"
         android:textSize="17sp"
-        android:layout_below="@id/profile_userName"
+        android:layout_below="@id/profile_profileName"
         android:textColor="@color/app_primary"
         android:fontFamily="@font/open_sans_extrabold"
         android:layout_marginTop="50dp"
@@ -99,16 +89,6 @@
         android:layout_marginTop="50dp"
         android:layout_marginHorizontal="30dp"/>
 
-    <Button
-        android:id="@+id/personal_info_edit"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
-        android:layout_above="@id/name_personal_info_layout"
-        android:layout_alignEnd="@id/name_personal_info_layout"
-        android:layout_marginRight="10dp"
-        android:background="@drawable/profile_edit_personal_information"
-        tools:ignore="TouchTargetSizeCheck" />
-
 
     <RelativeLayout
         android:id="@+id/name_personal_info_layout"
@@ -143,42 +123,11 @@
     </RelativeLayout>
 
     <RelativeLayout
-        android:id="@+id/username_personal_info_layout"
-        android:layout_width="match_parent"
-        android:layout_height="110dp"
-        android:background="@drawable/personal_info_layout"
-        android:layout_below="@id/name_personal_info_layout"
-        android:layout_marginHorizontal="20dp"
-        android:layout_marginBottom="15dp"
-        android:padding="20dp">
-
-        <TextView
-            android:id="@+id/profile_usernameFieldId"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/app_foreground"
-            android:fontFamily="@font/open_sans_regular"
-            android:textSize="14sp"
-            android:text="Username"/>
-        <TextView
-            android:id="@+id/profile_username_changeable"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/app_primary"
-            android:fontFamily="@font/open_sans_bold"
-            android:layout_below="@id/profile_usernameFieldId"
-            android:textSize="20sp"
-            android:text="\@username"
-            android:layout_marginTop="15dp"/>
-
-    </RelativeLayout>
-
-    <RelativeLayout
         android:id="@+id/email_personal_info_layout"
         android:layout_width="match_parent"
         android:layout_height="110dp"
         android:background="@drawable/personal_info_layout"
-        android:layout_below="@id/username_personal_info_layout"
+        android:layout_below="@id/name_personal_info_layout"
         android:layout_marginHorizontal="20dp"
         android:layout_marginBottom="15dp"
         android:padding="20dp">
@@ -237,7 +186,7 @@
             android:id="@+id/updatePassword"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="UPDATE?"
+            android:text="Reset?"
             android:textColor="#FF0000"
             android:layout_alignParentEnd="true"
             android:layout_alignTop="@id/profile_password_changeable"

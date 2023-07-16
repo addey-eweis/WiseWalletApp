@@ -31,9 +31,6 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activities.EditPersonalInfoActivity"
-            android:exported="false" />
-        <activity
             android:name=".activities.BudgetActivity"
             android:exported="false" />
         <activity

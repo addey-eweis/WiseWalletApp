@@ -35,53 +35,41 @@ public class RegisterUser {
         this.password = password;
     }
 
-    public void registration(){
+    public void registration() {
         firebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
-                //Email Verification
+                if (task.isSuccessful()) {
+                    firebaseUser = firebaseAuth.getCurrentUser(); // Move this line inside the onComplete callback
 
-                if(firebaseUser != null){
-
-                                firebaseUser.sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<Void> task) {
-
-                                        nameRegistration();
-                                        Toast.makeText(context, "Email Verification Sent!", Toast.LENGTH_SHORT).show();
-                                        Intent intent = new Intent(context, MainActivity.class);
-                                        intent.setFlags(FLAG_ACTIVITY_NEW_TASK);
-                                        context.startActivity(intent);
-
-
-                                    }
-                                }).addOnFailureListener(new OnFailureListener() {
-                                    @Override
-                                    public void onFailure(@NonNull Exception e) {
-
-                                        statusText.setText("Error Sending Verification Email");
-                                    }
-                                });
-
+                    firebaseUser.sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            nameRegistration();
+                            Toast.makeText(context, "Email Verification Sent!", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(context, MainActivity.class);
+                            intent.setFlags(FLAG_ACTIVITY_NEW_TASK);
+                            context.startActivity(intent);
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            statusText.setText("Error Sending Verification Email");
+                        }
+                    });
+                } else {
+                    if (firebaseAuth.fetchSignInMethodsForEmail(email).toString().equals("")) {
+                        throwException();
+                        statusText.setText("Already registered with the same email");
+                    }
                 }
-
-
             }
-
-
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                if(firebaseAuth.fetchSignInMethodsForEmail(email).toString().equals("")) {
-                    throwException();
-                }
-                else {
-                    statusText.setText("Already registered with same email");
-
-                }
+                // Handle failure case
             }
         });
-
     }
 
     private void nameRegistration(){
