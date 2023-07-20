@@ -7,32 +7,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.wisewallet.R;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.FirebaseFirestore;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class SignUpActivity extends AppCompatActivity {
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-
-        IsAuthenticated isAuthenticated = new IsAuthenticated(this);
-        boolean isUserAuthenticated = isAuthenticated.checkAuthentication();
-
-        if (!isUserAuthenticated) {
-            isAuthenticated.redirectToLoginScreen();
-            finish();
-        }
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,8 +41,8 @@ public class SignUpActivity extends AppCompatActivity {
                     String name = ((EditText)findViewById(R.id.name_signup)).getText().toString();
                     String email = ((EditText)findViewById(R.id.email_signup)).getText().toString();
                     String password = ((EditText)findViewById(R.id.password_signup)).getText().toString();
-                    TextView signupStatus= findViewById(R.id.sign_up_status);
-                    RegisterUser userSignup = new RegisterUser(SignUpActivity.this,signupStatus, name, email, password);
+
+                    RegisterUser userSignup = new RegisterUser(SignUpActivity.this, name, email, password);
 
                     if(!name.equals("") | !email.equals("") | !password.equals("")){
                         userSignup.registration();
@@ -72,32 +52,6 @@ public class SignUpActivity extends AppCompatActivity {
                     }
                 }
             };
-
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-
-        Map<String, Object> userData = new HashMap<>();
-        userData.put("name", ((EditText)findViewById(R.id.name_signup)).getText().toString());
-
-        db.collection("users").document(userId)
-                .set(userData)
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        // User information successfully stored
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        // Handle any errors while storing user information
-                    }
-                });
-    }
 
 
 }

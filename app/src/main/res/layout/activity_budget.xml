@@ -1,9 +1,100 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.BudgetActivity">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".activities.BudgetActivity"
+    android:layout_margin="30dp">
+    <TextView
+        android:id="@+id/spending_budget"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Spending Budget"
+        android:fontFamily="@font/open_sans_extrabold"
+        android:textSize="25sp"
+        android:layout_marginTop="70dp"
+        android:textColor="@color/app_primary"/>
+    <TextView
+        android:id="@+id/transaction_type_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Budget Period"
+        android:layout_below="@id/spending_budget"
+        android:textColor="@color/app_foreground"
+        android:fontFamily="@font/open_sans_semibold"
+        android:textSize="15sp"
+        android:layout_marginTop="33dp"/>
+    <Spinner
+        android:id="@+id/transaction_catagory_spinner"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="13dp"
+        android:layout_below="@id/transaction_type_text"
+        android:spinnerMode="dropdown"
+        />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <TextView
+        android:id="@+id/transaction_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Limit Amount"
+        android:layout_below="@id/transaction_catagory_spinner"
+        android:textColor="@color/app_foreground"
+        android:fontFamily="@font/open_sans_semibold"
+        android:textSize="15sp"
+        android:layout_marginTop="33dp"/>
+
+    <EditText
+        android:id="@+id/transaction_name_input"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_below="@id/transaction_name"
+        android:layout_marginTop="13dp"
+        android:inputType="number" />
+
+    <TextView
+        android:id="@+id/monetary_assets"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Monetary Assets"
+        android:fontFamily="@font/open_sans_extrabold"
+        android:textSize="25sp"
+        android:layout_marginTop="60dp"
+        android:layout_below="@id/transaction_name_input"
+        android:textColor="@color/app_primary"/>
+    <TextView
+        android:id="@+id/transaction_amount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Current Assets"
+        android:layout_below="@id/monetary_assets"
+        android:textColor="@color/app_foreground"
+        android:fontFamily="@font/open_sans_semibold"
+        android:textSize="15sp"
+        android:layout_marginTop="33dp"/>
+
+    <EditText
+        android:id="@+id/transaction_amount_input"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_below="@id/transaction_amount"
+        android:layout_marginTop="13dp"
+        android:inputType= "number" />
+
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/next_button_budget"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        style="@style/Widget.Material3.Button.OutlinedButton"
+        android:layout_alignParentBottom="true"
+        android:textSize="20sp"
+        android:layout_marginBottom="70dp"
+        android:text="Next"
+        android:fontFamily="@font/open_sans_bold"
+        app:strokeColor="@color/app_primary"
+        app:strokeWidth="2.5dp"/>
+
+
+</RelativeLayout>

@@ -5,17 +5,148 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_margin="30dp"
     tools:context=".activities.NavAddActivity">
 
   <TextView
-      android:id="@+id/Recent_Activity_Title"
+      android:id="@+id/spending_budget"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:text="Add"
       android:fontFamily="@font/open_sans_extrabold"
-      android:textColor="@color/app_primary"
+      android:textSize="25sp"
+      android:layout_marginTop="20dp"
+      android:textColor="@color/app_primary"/>
+
+  <TextView
+      android:id="@+id/transaction_type_text"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="Type"
+      android:layout_below="@id/spending_budget"
+      android:textColor="@color/app_foreground"
+      android:fontFamily="@font/open_sans_semibold"
+      android:textSize="15sp"
+      android:layout_marginTop="33dp"/>
+
+  <LinearLayout
+      android:id="@+id/transaction_type_buttons"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_below="@id/transaction_type_text"
+      android:layout_marginTop="13dp">
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/income_button_type"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:textAllCaps="false"
+        android:layout_weight="1"
+        app:cornerRadius="0dp"
+        android:backgroundTint="@color/app_foreground"
+        android:text="Income"
+        android:fontFamily="@font/open_sans_regular"/>
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/expenses_button"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_weight="1"
+        android:textAllCaps="false"
+        android:backgroundTint="@color/app_foreground"
+        app:cornerRadius="0dp"
+        android:text="Expenses"
+        android:fontFamily="@font/open_sans_regular"/>
+  </LinearLayout>
+
+  <TextView
+      android:id="@+id/transaction_name"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="Name"
+      android:layout_below="@id/transaction_type_buttons"
+      android:textColor="@color/app_foreground"
+      android:fontFamily="@font/open_sans_semibold"
+      android:textSize="15sp"
+      android:layout_marginTop="20dp"/>
+
+  <EditText
+      android:id="@+id/transaction_name_input"
+      android:layout_width="match_parent"
+      android:layout_height="60dp"
+      android:padding="0dp"
+      android:layout_below="@id/transaction_name"
+      android:layout_marginTop="13dp"
+      android:inputType="textPersonName" />
+
+  <TextView
+      android:id="@+id/transaction_amount"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="Amount"
+      android:layout_below="@id/transaction_name_input"
+      android:textColor="@color/app_foreground"
+      android:fontFamily="@font/open_sans_semibold"
+      android:textSize="15sp"
+      android:layout_marginTop="20dp"/>
+
+  <EditText
+      android:id="@+id/transaction_amount_input"
+      android:layout_width="match_parent"
+      android:layout_height="60dp"
+      android:padding="0dp"
+      android:layout_below="@id/transaction_amount"
+      android:layout_marginTop="13dp"
+      android:inputType= "number" />
+
+  <TextView
+      android:id="@+id/transaction_date"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="Date"
+      android:layout_below="@id/transaction_amount_input"
+      android:textColor="@color/app_foreground"
+      android:fontFamily="@font/open_sans_semibold"
+      android:textSize="15sp"
+      android:layout_marginTop="20dp"/>
+  <EditText
+      android:id="@+id/transaction_date_input"
+      android:layout_width="match_parent"
+      android:layout_height="60dp"
+      android:layout_below="@id/transaction_date"
+      android:layout_marginTop="13dp"
+      android:padding="0dp"
+      android:inputType= "date" />
+
+  <TextView
+      android:id="@+id/transaction_catagory"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="Catagory"
+      android:layout_below="@id/transaction_date_input"
+      android:textColor="@color/app_foreground"
+      android:fontFamily="@font/open_sans_semibold"
+      android:textSize="15sp"
+      android:layout_marginTop="20dp"/>
+  <Spinner
+      android:id="@+id/transaction_catagory_spinner"
+      android:layout_width="match_parent"
+      android:layout_height="50dp"
+      android:layout_marginTop="13dp"
+      android:layout_below="@id/transaction_catagory"
+      android:spinnerMode="dropdown"
+      />
+
+  <com.google.android.material.button.MaterialButton
+      android:id="@+id/done_button_add"
+      android:layout_width="match_parent"
+      android:layout_height="70dp"
+      style="@style/Widget.Material3.Button.OutlinedButton"
+      android:layout_alignParentBottom="true"
       android:textSize="20sp"
-      android:layout_marginLeft="30dp"
-      android:layout_marginTop="60dp"/>
+      android:layout_marginBottom="20dp"
+      android:text="Save"
+      android:fontFamily="@font/open_sans_bold"
+      app:strokeColor="@color/app_primary"
+      app:strokeWidth="2.5dp"/>
+
 
   </RelativeLayout>

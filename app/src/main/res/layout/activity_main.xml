@@ -72,40 +72,30 @@
                     android:id="@+id/balanceText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
                     android:layout_marginTop="80dp"
+                    android:layout_centerHorizontal="true"
                     >
 
                     <TextView
-                        android:id="@+id/dollar_amount_landing"
+                        android:id="@+id/currency_landing"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="60sp"
-                        android:textColor="@color/app_primary"
+                        android:textColor="@color/app_foreground"
                         android:fontFamily="@font/open_sans_regular"
-                        android:text="\$"
+                        android:text="USD"
+                        android:layout_toEndOf="@id/balance_landing"
+                        android:layout_alignBaseline="@id/balance_landing"
                         />
                     <TextView
-                        android:id="@+id/amount_amount_landing"
+                        android:id="@+id/balance_landing"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="60sp"
-                        android:layout_alignBaseline="@id/dollar_amount_landing"
                         android:textColor="@color/app_primary"
                         android:fontFamily="@font/open_sans_regular"
                         android:text="@string/amount_landing"
-                        android:layout_toRightOf="@id/dollar_amount_landing"
-                        />
-                    <TextView
-                        android:id="@+id/fraction_amount_amount_landing"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="50sp"
-                        android:textColor="@color/app_primary"
-                        android:fontFamily="@font/open_sans_regular"
-                        android:text=".25"
-                        android:layout_toRightOf="@id/amount_amount_landing"
-                        android:layout_alignBaseline="@id/dollar_amount_landing"
+
                         />
             </RelativeLayout>
         </RelativeLayout>

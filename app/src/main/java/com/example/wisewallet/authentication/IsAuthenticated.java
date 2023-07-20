@@ -3,6 +3,7 @@ package com.example.wisewallet.authentication;
 import android.content.Context;
 import android.content.Intent;
 
+import com.example.wisewallet.activities.SignActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 

@@ -4,32 +4,34 @@ import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
 
 import android.content.Context;
 import android.content.Intent;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
-import com.example.wisewallet.activities.MainActivity;
+import com.example.wisewallet.activities.CurrencyActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class RegisterUser {
     private final String name;
     private final String email;
     private final String password;
     private final Context context;
-    private final TextView statusText;
     private final FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
 
-    public RegisterUser(Context context, TextView statusText, String name, String email, String password) {
+    public RegisterUser(Context context, String name, String email, String password) {
         this.context = context;
-        this.statusText = statusText;
         this.name = name;
         this.email = email;
         this.password = password;
@@ -47,20 +49,42 @@ public class RegisterUser {
                         public void onComplete(@NonNull Task<Void> task) {
                             nameRegistration();
                             Toast.makeText(context, "Email Verification Sent!", Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(context, MainActivity.class);
+                            Intent intent = new Intent(context, CurrencyActivity.class);
                             intent.setFlags(FLAG_ACTIVITY_NEW_TASK);
                             context.startActivity(intent);
+
+
+                            FirebaseFirestore db = FirebaseFirestore.getInstance();
+                            String userId = firebaseAuth.getUid();
+
+                            Map<String, Object> userData = new HashMap<>();
+                            userData.put("name", name);
+
+                            db.collection("users").document(userId)
+                                    .set(userData)
+                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        @Override
+                                        public void onSuccess(Void aVoid) {
+                                            // User information successfully stored
+                                        }
+                                    })
+                                    .addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
+                                            // Handle any errors while storing user information
+                                        }
+                                    });
                         }
                     }).addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
-                            statusText.setText("Error Sending Verification Email");
+                            Toast.makeText(context, "Error Sending Verification Email", Toast.LENGTH_SHORT).show();
                         }
                     });
                 } else {
                     if (firebaseAuth.fetchSignInMethodsForEmail(email).toString().equals("")) {
                         throwException();
-                        statusText.setText("Already registered with the same email");
+                        Toast.makeText(context, "Already registered with the same email", Toast.LENGTH_SHORT).show();
                     }
                 }
             }
@@ -82,7 +106,8 @@ public class RegisterUser {
 
 
     public void throwException(){
-        statusText.setText("Please enter your Email in the correct format.");
+        Toast.makeText(context, "Please enter your Email in the correct format.", Toast.LENGTH_SHORT).show();
+
     }
 
 }

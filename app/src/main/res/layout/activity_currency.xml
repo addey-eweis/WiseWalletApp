@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.CurrencyActivity"
+    android:layout_margin="30dp">
+
+    <TextView
+        android:id="@+id/currency_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Default Currency"
+        android:fontFamily="@font/open_sans_extrabold"
+        android:textSize="25sp"
+        android:layout_marginTop="20dp"
+        android:textColor="@color/app_primary"/>
+
+    <RelativeLayout
+        android:id="@+id/currency_item"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_below="@id/currency_title">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="100dp"/>
+
+    </RelativeLayout>
+
+    <SearchView
+        android:id="@+id/currency_searchbar"
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:layout_marginTop="20dp"
+        android:layout_below="@id/currency_item"
+         />
+
+    <ListView
+        android:id="@+id/currency_list"
+        android:layout_width="match_parent"
+        android:layout_height="440dp"
+        android:layout_marginTop="20dp"
+        android:layout_below="@id/currency_searchbar"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/next_button_currency"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        style="@style/Widget.Material3.Button.OutlinedButton"
+        android:layout_alignParentBottom="true"
+        android:textSize="20sp"
+        android:layout_marginBottom="10dp"
+        android:text="Next"
+        android:fontFamily="@font/open_sans_bold"
+        app:strokeColor="@color/app_primary"
+        app:strokeWidth="2.5dp"/>
+
+
+</RelativeLayout>

@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
@@ -18,14 +19,20 @@ import com.example.wisewallet.fragments.RecentFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
-
-import java.util.Objects;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.ListenerRegistration;
 
 public class MainActivity extends AppCompatActivity {
     Fragment selectedFragment = new Fragment();
     FirebaseFirestore db = FirebaseFirestore.getInstance();
-    String userId = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
+    String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+    private ListenerRegistration totalListenerRegistration;
+
+    String total;
 
     @Override
     protected void onResume() {
@@ -38,7 +45,10 @@ public class MainActivity extends AppCompatActivity {
             isAuthenticated.redirectToLoginScreen();
             finish();
         }
+
+
     }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,7 +68,60 @@ public class MainActivity extends AppCompatActivity {
 
         Button toggleBalanceButton = findViewById(R.id.toggleButton);
         toggleBalanceButton.setOnClickListener(toggleButtonListener);
+
+
     }
+
+
+    // Toggle Balance Button
+    private final View.OnClickListener toggleButtonListener =
+            new View.OnClickListener() {
+                boolean isTotal = false;
+
+                @Override
+                public void onClick(View view) {
+                    Button button = view.findViewById(R.id.toggleButton);
+                    DocumentReference totalDocument = db.collection("users").document(userId);
+                    TextView balance = findViewById(R.id.balance_landing);
+
+
+                    totalListenerRegistration = totalDocument.addSnapshotListener(new EventListener<DocumentSnapshot>() {
+                        @Override
+                        public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e) {
+                            if (e != null) {
+                                // Handle any errors
+                                return;
+                            }
+
+                            if (documentSnapshot != null && documentSnapshot.exists()) {
+                                total = documentSnapshot.getString("total");
+
+                                if (total != null && !isTotal) {
+                                    runOnUiThread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            balance.setText(total);
+                                        }
+                                    });
+                                    button.setText("Total Balance");
+                                    isTotal = true;
+
+                                }
+
+                                else{
+                                    int totalNumber = Integer.parseInt(total);
+                                    button.setText("Remaining Balance");
+                                    //
+                                    balance.setText(String.valueOf(Math.round(1000 - totalNumber)));
+                                    isTotal = false;
+                                }
+                            }
+                        }
+                    });
+
+                }
+            };
+
 
     private final View.OnClickListener profileButtonListener =
             new View.OnClickListener() {
@@ -69,26 +132,6 @@ public class MainActivity extends AppCompatActivity {
                 }
             };
 
-// Toggle Balance Button
-    private final View.OnClickListener toggleButtonListener =
-            new View.OnClickListener() {
-                boolean isTotal = false;
-                @Override
-                public void onClick(View view) {
-                        Button button = view.findViewById(R.id.toggleButton);
-                        TextView balance = view.findViewById(R.id.amount_amount_landing);
-                    if(isTotal){
-                        button.setText("Remaining Balance");
-                        isTotal = false;
-                    }
-                    else{
-                        button.setText("Total Balance");
-                        isTotal = true;
-
-                    }
-
-                }
-            };
 
 
     private final NavigationBarView.OnItemSelectedListener navListener =
@@ -115,4 +158,14 @@ public class MainActivity extends AppCompatActivity {
                     return true;
                 }
             };
+
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (totalListenerRegistration != null) {
+            totalListenerRegistration.remove();
+        }
+    }
+
 }

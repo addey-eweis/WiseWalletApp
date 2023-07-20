@@ -1,4 +1,4 @@
-package com.example.wisewallet.authentication;
+package com.example.wisewallet.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,7 +12,8 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.wisewallet.R;
-import com.example.wisewallet.activities.MainActivity;
+import com.example.wisewallet.authentication.LogInActivity;
+import com.example.wisewallet.authentication.SignUpActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 

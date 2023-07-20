@@ -13,7 +13,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.wisewallet.R;
 import com.example.wisewallet.authentication.IsAuthenticated;
-import com.example.wisewallet.authentication.SignActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;

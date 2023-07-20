@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.InfoActivity"
+    android:layout_marginHorizontal="30dp"
+    >
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/viewPager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/startNowButton"
+        android:layout_marginVertical="50dp"/>
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginVertical="20dp"
+        android:layout_above="@id/startNowButton">
+
+    <ImageView
+        android:id="@+id/tab_dot_one"
+        android:layout_width="12dp"
+        android:layout_height="12dp"
+        android:layout_marginHorizontal="5dp"
+        android:background="@drawable/tab_dot_indicator_off"/>
+    <ImageView
+        android:id="@+id/tab_dot_two"
+        android:layout_width="12dp"
+        android:layout_height="12dp"
+        android:layout_marginHorizontal="5dp"
+        android:background="@drawable/tab_dot_indicator_off"/>
+    <ImageView
+        android:id="@+id/tab_dot_three"
+        android:layout_width="12dp"
+        android:layout_height="12dp"
+        android:layout_marginHorizontal="5dp"
+        android:background="@drawable/tab_dot_indicator_on"/>
+    </LinearLayout>
+
+
+    <Button
+        android:id="@+id/startNowButton"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:text="Start Now"
+        android:layout_above="@id/already_signed_layout"
+        android:textSize="21sp"
+        android:fontFamily="@font/open_sans_bold"
+        android:textColor="@color/white"
+        android:background="@drawable/sign_in_button" />
+
+    <RelativeLayout
+        android:id="@+id/already_signed_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="60dp">
+    <TextView
+        android:id="@+id/current_user"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Already have an account?"
+        android:textSize="15sp"
+        android:fontFamily="@font/open_sans_bold"
+        android:textColor="@color/app_foreground"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/current_user"
+        android:textColor="@color/app_primary"
+        android:text="@string/sign_in"
+        android:fontFamily="@font/open_sans_extrabold"
+        android:layout_marginStart="6dp"/>
+    </RelativeLayout>
+
+
+</RelativeLayout>
