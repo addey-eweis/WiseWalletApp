@@ -98,6 +98,18 @@
       android:inputType= "number" />
 
   <TextView
+      android:id="@+id/currency_display_add"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="USD"
+      android:textColor="@color/app_foreground"
+      android:fontFamily="@font/open_sans_semibold"
+      android:textSize="20sp"
+      android:layout_marginRight="10dp"
+      android:layout_alignParentEnd="true"
+      android:layout_alignBaseline="@id/transaction_amount_input"/>
+
+  <TextView
       android:id="@+id/transaction_date"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
@@ -115,6 +127,7 @@
       android:layout_marginTop="13dp"
       android:padding="0dp"
       android:inputType= "date" />
+
 
   <TextView
       android:id="@+id/transaction_catagory"

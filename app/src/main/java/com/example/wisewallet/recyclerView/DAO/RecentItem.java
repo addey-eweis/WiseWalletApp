@@ -1,41 +1,47 @@
 package com.example.wisewallet.recyclerView.DAO;
 
 public class RecentItem {
-    private String merchantText;
-    private String categoryText;
-    private String dollarText;
-    private String dateText;
+    private String transactionName;
+    private String transactionCatagory;
+    private String transactionAmount;
+    private String transactionType;
+    private String transactionCurrency;
+    private String transactionDate;
+
 
     // Constructor
-    public RecentItem(String merchantText, String categoryText, String dollarText, String dateText) {
-        this.merchantText = merchantText;
-        this.categoryText = categoryText;
-        this.dollarText = dollarText;
-        this.dateText = dateText;
+    public RecentItem(String transactionName, String transactionCatagory, String transactionAmount, String transactionType, String transactionCurrency, String transactionDate) {
+        this.transactionName = transactionName;
+        this.transactionCatagory = transactionCatagory;
+        this.transactionAmount = transactionAmount;
+        this.transactionType = transactionType;
+        this.transactionCurrency = transactionCurrency;
+        this.transactionDate = transactionDate;
     }
 
-    public String getMerchantText() {
-        return merchantText;
+
+    public String getTransactionName() {
+        return transactionName;
     }
-    public void setMerchantText(String merchantText) {
-        this.merchantText = merchantText;
+    public String getTransactionCatagory() {
+        return transactionCatagory;
     }
-    public String getCategoryText() {
-        return categoryText;
+
+    public String getTransactionType() {
+        return transactionType;
     }
-    public void setCategoryText(String categoryText) {
-        this.categoryText = categoryText;
+
+    public String getTransactionCurrency() {
+        return transactionCurrency;
     }
-    public String getDollarText() {
-        return dollarText;
+
+
+    public String getTransactionAmount() {
+        return transactionAmount;
     }
-    public void setDollarText(String dollarText) {
-        this.dollarText = dollarText;
+
+    public String getTransactionDate() {
+        return transactionDate;
     }
-    public String getDateText() {
-        return dateText;
-    }
-    public void setDateText(String dateText) {
-        this.dateText = dateText;
-    }
+
 }

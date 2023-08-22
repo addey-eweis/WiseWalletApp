@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activities.MainActivity"
-    android:background="@color/landing_background">
+    android:background="@color/white">
 
     <!-- Layout for the Dashboard part   -->
     <RelativeLayout
@@ -57,6 +57,7 @@
             android:layout_centerInParent="true"
             android:layout_marginTop="45dp">
 
+
             <Button
                 android:id="@+id/toggleButton"
                 android:layout_width="match_parent"
@@ -66,8 +67,8 @@
                 android:fontFamily="@font/open_sans_bold"
                 android:textSize="15dp"
                 android:background="@drawable/sign_in_button"
-
                 />
+
                 <RelativeLayout
                     android:id="@+id/balanceText"
                     android:layout_width="wrap_content"
@@ -105,7 +106,7 @@
     <FrameLayout
         android:id="@+id/flFragment"
         android:layout_width="match_parent"
-        android:layout_height="460dp"
+        android:layout_height="480dp"
         android:background="@drawable/fragment_background"
         android:layout_alignParentBottom="true"
         android:layout_above="@id/bottom_nav"
@@ -119,7 +120,7 @@
         android:layout_height="80dp"
         android:layout_alignParentBottom="true"
         app:menu="@menu/bottom_nav"
-        android:background="@drawable/nav_background"
+        android:background="@color/white"
         app:labelVisibilityMode="unlabeled"
         app:itemIconSize="35dp"
         android:paddingTop="10dp"/>

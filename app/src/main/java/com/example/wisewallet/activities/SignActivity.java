@@ -12,23 +12,24 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.wisewallet.R;
-import com.example.wisewallet.authentication.LogInActivity;
-import com.example.wisewallet.authentication.SignUpActivity;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
+import com.example.wisewallet.firebaseHandeling.FirebaseOperationsManager;
 
 
 public class SignActivity extends AppCompatActivity {
 
-    private FirebaseAuth firebaseAuth;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        FirebaseOperationsManager firebaseOperationsManager = FirebaseOperationsManager.getInstance();
+        if(firebaseOperationsManager.getUser() != null){
+            Intent authenticatedIntent = new Intent(this, MainActivity.class);
+            authenticatedIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(authenticatedIntent);
+            finish();
+        }
+
         super.onCreate(savedInstanceState);
         setTheme(R.style.Theme_WiseWallet);
         setContentView(R.layout.activity_sign_page);
-        firebaseAuth = FirebaseAuth.getInstance();
-
 
         TextView loginTextView = findViewById(R.id.log_in_link);
         loginTextView.setOnClickListener(LogInListener);
@@ -37,17 +38,7 @@ public class SignActivity extends AppCompatActivity {
         signUpButton.setOnClickListener(signUpListener);
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        //Checking if user is signed in
-        FirebaseUser currentUser = firebaseAuth.getCurrentUser();
 
-        if(currentUser != null){
-            Intent authenticatedIntent = new Intent(this, MainActivity.class);
-            startActivity(authenticatedIntent);
-        }
-    }
 
     private final OnClickListener LogInListener =
             new OnClickListener() {
@@ -65,8 +56,8 @@ public class SignActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View view) {
                     String nameText = ((EditText) findViewById(R.id.sign_page_name)).getText().toString();
-                    Bundle bundle = new Bundle();
-                    if(!nameText.equals("")){
+                    if(!nameText.equals("") | nameText != null){
+                        Bundle bundle = new Bundle();
                         bundle.putString("signup_name", nameText);
                         Intent intent = new Intent(getApplicationContext(), SignUpActivity.class);
                         intent.putExtras(bundle);

@@ -10,6 +10,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,36 +18,36 @@ import androidx.core.content.ContextCompat;
 
 import com.example.wisewallet.R;
 import com.example.wisewallet.TransactionHandeling.Transaction;
-import com.example.wisewallet.authentication.IsAuthenticated;
+import com.example.wisewallet.firebaseHandeling.FirebaseOperationsManager;
 import com.google.android.material.button.MaterialButton;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.Calendar;
 
-public class NavAddActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+public class NavAddActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
 
     String transactionType;
     EditText date;
     String categoryName;
-
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-
-        IsAuthenticated isAuthenticated = new IsAuthenticated(getApplicationContext());
-        boolean isUserAuthenticated = isAuthenticated.checkAuthentication();
-
-        if (!isUserAuthenticated) {
-            isAuthenticated.redirectToLoginScreen();
-            finish();
-        }
-    }
+    String Currency;
+    Boolean transactionTypeSelected = false;
+    FirebaseOperationsManager firebaseOperationsManager = FirebaseOperationsManager.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        //Check Authentication Status
+        firebaseOperationsManager.checkAuthentication(NavAddActivity.this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nav_add);
+
+        firebaseOperationsManager.getCurrency(NavAddActivity.this, new FirebaseOperationsManager.FirebaseCurrencyCallback() {
+            @Override
+            public void onCurrencyRead(String currency) {
+                Currency = currency;
+                TextView currencyTextView = findViewById(R.id.currency_display_add);
+                currencyTextView.setText(currency);
+            }
+        });
 
         MaterialButton incomeButton = findViewById(R.id.income_button_type);
         MaterialButton expensesButton = findViewById(R.id.expenses_button);
@@ -188,6 +189,8 @@ public class NavAddActivity extends AppCompatActivity implements AdapterView.OnI
                     transactionType = "Expense";
                 }
             };
+
+
 
 
 

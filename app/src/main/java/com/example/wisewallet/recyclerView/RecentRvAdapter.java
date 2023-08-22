@@ -1,6 +1,7 @@
 package com.example.wisewallet.recyclerView;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,17 +35,32 @@ public class RecentRvAdapter extends RecyclerView.Adapter<RecentRvViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull RecentRvViewHolder holder, int position) {
-        String dollarAmountText = recentItems.get(position).getDollarText();
-        String categoryText = recentItems.get(position).getCategoryText();
-        String merchantText = recentItems.get(position).getMerchantText();
-        String dateText = recentItems.get(position).getDateText();
+        String transactionName = recentItems.get(position).getTransactionName();
+        String transactionCatagory = recentItems.get(position).getTransactionCatagory();
+        String transactionAmount = recentItems.get(position).getTransactionAmount();
+        String transactionType = recentItems.get(position).getTransactionType();
+        String transactionCurrency = recentItems.get(position).getTransactionCurrency();
+        String transactionDate = recentItems.get(position).getTransactionDate();
 
-        holder.dollarAmount.setText(dollarAmountText);
-        holder.category.setText(categoryText);
-        holder.merchant.setText(merchantText);
-        holder.date.setText(dateText);
+        if(transactionType.equals("+")){
+            holder.transactionType.setTextColor(Color.rgb(0,191,19));
+            holder.transactionAmount.setTextColor(Color.rgb(0,191,19));
+        }
+        else{
+            holder.transactionType.setTextColor(Color.RED);
+            holder.transactionAmount.setTextColor(Color.RED);
+
+        }
+
+        holder.transactionName.setText(transactionName);
+        holder.transactionCatagory.setText(transactionCatagory);
+        holder.transactionAmount.setText(transactionAmount);
+        holder.transactionType.setText(transactionType);
+        holder.transactionCurrency.setText(transactionCurrency);
+        holder.transactionDate.setText(transactionDate);
 
     }
+
 
     @Override
     public int getItemCount() {

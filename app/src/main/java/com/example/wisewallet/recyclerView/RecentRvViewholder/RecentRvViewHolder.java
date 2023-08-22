@@ -10,19 +10,22 @@ import com.example.wisewallet.R;
 
 public class RecentRvViewHolder extends RecyclerView.ViewHolder{
 
-    public final TextView merchant;
-    public final TextView category;
-    public final TextView dollarAmount;
-    public final TextView date;
+    public final TextView transactionName;
+    public final TextView transactionCatagory;
+    public final TextView transactionAmount;
+    public final TextView transactionType;
+    public final TextView transactionCurrency;
+    public final TextView transactionDate;
 
     public RecentRvViewHolder(@NonNull View itemView) {
         super(itemView);
 
-
-        merchant = itemView.findViewById(R.id.analytics_merchant);
-        category = itemView.findViewById(R.id.analytics_category);
-        dollarAmount = itemView.findViewById(R.id.recent_dollar_amount);
-        date = itemView.findViewById(R.id.recent_date);
+        transactionName = itemView.findViewById(R.id.analytics_merchant);
+        transactionCatagory = itemView.findViewById(R.id.analytics_category);
+        transactionAmount = itemView.findViewById(R.id.recent_dollar_amount);
+        transactionType = itemView.findViewById(R.id.recent_type);
+        transactionCurrency = itemView.findViewById(R.id.recent_currency);
+        transactionDate = itemView.findViewById(R.id.recent_date);
 
     }
 

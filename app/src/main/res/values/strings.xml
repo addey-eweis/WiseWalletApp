@@ -7,15 +7,38 @@
     <string name="nav_new">New</string>
     <string name="nav_recent">Activity</string>
     <string name="sign_in"><u>Sign In</u></string>
-    <string name="amount_landing">1</string>
+    <string name="amount_landing">0</string>
 
     <string-array name="categories">
+        <item>Select a Category</item>
         <item>Housing</item>
         <item>Transportation</item>
         <item>Food</item>
         <item>Health and Insurance</item>
         <item>Entertainment</item>
         <item>Clothing and Personal Care</item>
+    </string-array>
 
+    <string-array name="period">
+        <item>Select Budget Period</item>
+        <item>Daily</item>
+        <item>Weekly</item>
+        <item>Monthly</item>
+        <item>Yearly</item>
+    </string-array>
+
+    <string-array name="currencies">
+        <item>USD</item>
+        <item>EGP</item>
+        <item>TRY</item>
+        <item>GBP</item>
+        <item>USD</item>
+        <item>EGP</item>
+        <item>TRY</item>
+        <item>GBP</item>
+        <item>USD</item>
+        <item>EGP</item>
+        <item>TRY</item>
+        <item>GBP</item>
     </string-array>
 </resources>

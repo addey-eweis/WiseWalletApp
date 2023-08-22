@@ -9,12 +9,12 @@
         android:id="@+id/Recent_Activity_Title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Recent Activity"
+        android:text="Transaction History"
         android:fontFamily="@font/open_sans_extrabold"
         android:textColor="@color/app_primary"
         android:textSize="20sp"
         android:layout_marginLeft="30dp"
-        android:layout_marginTop="60dp"/>
+        android:layout_marginTop="50dp"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recent_activity_recycler_view"

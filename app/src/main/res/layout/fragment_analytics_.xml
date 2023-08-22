@@ -6,13 +6,24 @@
     tools:context=".fragments.AnalyticsFragment">
 
     <TextView
+        android:id="@+id/budgetAndGoalText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Analytics"
+        android:text="Budget &amp; Goals"
         android:fontFamily="@font/open_sans_extrabold"
         android:textColor="@color/app_primary"
         android:textSize="20sp"
         android:layout_marginLeft="30dp"
         android:layout_marginTop="60dp"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/budgetsAndGoals"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/budgetAndGoalText"
+        android:layout_alignParentBottom="true"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginVertical="33dp"/>
+
 
 </RelativeLayout>

@@ -13,10 +13,10 @@
         android:text="Spending Budget"
         android:fontFamily="@font/open_sans_extrabold"
         android:textSize="25sp"
-        android:layout_marginTop="70dp"
+        android:layout_marginTop="33dp"
         android:textColor="@color/app_primary"/>
     <TextView
-        android:id="@+id/transaction_type_text"
+        android:id="@+id/budget_period_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Budget Period"
@@ -26,72 +26,117 @@
         android:textSize="15sp"
         android:layout_marginTop="33dp"/>
     <Spinner
-        android:id="@+id/transaction_catagory_spinner"
+        android:id="@+id/budget_period_spinner"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginTop="13dp"
-        android:layout_below="@id/transaction_type_text"
+        android:layout_below="@id/budget_period_title"
         android:spinnerMode="dropdown"
+
         />
 
     <TextView
-        android:id="@+id/transaction_name"
+        android:id="@+id/budget_limit_amount_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Limit Amount"
-        android:layout_below="@id/transaction_catagory_spinner"
+        android:layout_below="@id/budget_period_spinner"
         android:textColor="@color/app_foreground"
         android:fontFamily="@font/open_sans_semibold"
         android:textSize="15sp"
         android:layout_marginTop="33dp"/>
 
     <EditText
-        android:id="@+id/transaction_name_input"
+        android:id="@+id/budget_limit_amount_field"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:layout_below="@id/transaction_name"
+        android:layout_below="@id/budget_limit_amount_title"
         android:layout_marginTop="13dp"
         android:inputType="number" />
+    <TextView
+        android:id="@+id/currency_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="USD"
+        android:textColor="@color/app_foreground"
+        android:fontFamily="@font/open_sans_semibold"
+        android:textSize="20sp"
+        android:layout_marginRight="10dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignBaseline="@id/budget_limit_amount_field"/>
 
     <TextView
-        android:id="@+id/monetary_assets"
+        android:id="@+id/goal_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Monetary Assets"
+        android:text="Goals"
+        android:layout_below="@id/budget_limit_amount_field"
         android:fontFamily="@font/open_sans_extrabold"
         android:textSize="25sp"
-        android:layout_marginTop="60dp"
-        android:layout_below="@id/transaction_name_input"
+        android:layout_marginTop="40dp"
         android:textColor="@color/app_primary"/>
+
     <TextView
-        android:id="@+id/transaction_amount"
+        android:id="@+id/goal_name_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Current Assets"
-        android:layout_below="@id/monetary_assets"
+        android:text="What are you saving up for?"
+        android:layout_below="@id/goal_title"
         android:textColor="@color/app_foreground"
         android:fontFamily="@font/open_sans_semibold"
         android:textSize="15sp"
         android:layout_marginTop="33dp"/>
 
     <EditText
-        android:id="@+id/transaction_amount_input"
+        android:id="@+id/goal_name_field"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:layout_below="@id/transaction_amount"
+        android:layout_below="@id/goal_name_title"
         android:layout_marginTop="13dp"
-        android:inputType= "number" />
+        android:inputType="textCapWords" />
+
+
+    <TextView
+        android:id="@+id/goal_cost_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="How much does it cost?"
+        android:layout_below="@id/goal_name_field"
+        android:textColor="@color/app_foreground"
+        android:fontFamily="@font/open_sans_semibold"
+        android:textSize="15sp"
+        android:layout_marginTop="33dp"/>
+
+    <EditText
+        android:id="@+id/goal_cost_field"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_below="@id/goal_cost_title"
+        android:layout_marginTop="13dp"
+        android:inputType="number" />
+    <TextView
+        android:id="@+id/currency_view2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="USD"
+        android:textColor="@color/app_foreground"
+        android:fontFamily="@font/open_sans_semibold"
+        android:textSize="20sp"
+        android:layout_marginRight="10dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignBaseline="@id/goal_cost_field"
+        tools:ignore="DuplicateIds" />
 
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/next_button_budget"
+        android:id="@+id/save_button_budget"
         android:layout_width="match_parent"
         android:layout_height="70dp"
         style="@style/Widget.Material3.Button.OutlinedButton"
         android:layout_alignParentBottom="true"
         android:textSize="20sp"
-        android:layout_marginBottom="70dp"
-        android:text="Next"
+        android:layout_marginBottom="10dp"
+        android:text="Save"
         android:fontFamily="@font/open_sans_bold"
         app:strokeColor="@color/app_primary"
         app:strokeWidth="2.5dp"/>

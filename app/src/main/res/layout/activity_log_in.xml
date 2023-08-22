@@ -4,13 +4,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+
+
 <RelativeLayout
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/app_background"
-    tools:context=".authentication.LogInActivity">
+    tools:context=".activities.LogInActivity">
 
     <ImageView
         android:id="@+id/login_logo"
@@ -50,32 +52,49 @@
             android:fontFamily="@font/open_sans_bold"
             android:layout_marginTop="50dp"/>
 
-        <com.google.android.material.textfield.TextInputEditText
+        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/sign_in_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/sign_in_text"
-            android:textColor="@color/app_primary"
-            android:textColorHint="@color/app_foreground"
+            android:layout_marginTop="20dp"
             android:hint="Email"
-            android:maxLines="1"
-            android:inputType="textEmailAddress"
-            android:layout_marginLeft="30dp"
-            android:layout_marginTop="30dp"
-            android:layout_marginRight="30dp"
-            android:backgroundTint="@color/app_primary"/>
-        <com.google.android.material.textfield.TextInputEditText
+            android:layout_marginEnd="30dp"
+            app:passwordToggleTint="@color/app_primary"
+            android:layout_marginStart="30dp">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/email_signup"
+                android:inputType="textEmailAddress"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fontFamily="@font/open_sans_regular"
+                android:textColor="@color/app_primary"
+                android:backgroundTint="@color/white"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/sign_in_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/sign_in_email"
-            android:textColor="@color/app_primary"
-            android:textColorHint="@color/app_foreground"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="30dp"
             android:hint="Password"
-            android:maxLines="1"
-            android:layout_marginTop="30dp"
-            android:layout_marginHorizontal="30dp"
-            android:backgroundTint="@color/app_primary"/>
+            app:passwordToggleEnabled="true"
+            app:passwordToggleTint="@color/app_primary"
+            android:layout_marginStart="30dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/password_signup"
+                android:layout_width="match_parent"
+                android:inputType="textPassword"
+                android:textColor="@color/app_primary"
+                android:layout_height="match_parent"
+                android:fontFamily="@font/open_sans_regular"
+                android:backgroundTint="@color/white"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
             android:id="@+id/auth_status_text"

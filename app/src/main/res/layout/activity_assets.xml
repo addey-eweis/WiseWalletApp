@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.AssetsActivity"
+    android:layout_margin="30dp">
+
+
+    <TextView
+        android:id="@+id/monetary_assets"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Monetary Assets"
+        android:fontFamily="@font/open_sans_extrabold"
+        android:textSize="25sp"
+        android:layout_marginTop="60dp"
+        android:textColor="@color/app_primary"/>
+    <TextView
+        android:id="@+id/current_assets_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Current Assets"
+        android:layout_below="@id/monetary_assets"
+        android:textColor="@color/app_foreground"
+        android:fontFamily="@font/open_sans_semibold"
+        android:textSize="15sp"
+        android:layout_marginTop="33dp"/>
+
+    <EditText
+        android:id="@+id/current_assets_field"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_below="@id/current_assets_title"
+        android:layout_marginTop="13dp"
+        android:inputType= "number" />
+    <TextView
+        android:id="@+id/currency_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="USD"
+        android:textColor="@color/app_foreground"
+        android:fontFamily="@font/open_sans_semibold"
+        android:textSize="20sp"
+        android:layout_marginRight="10dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignBaseline="@id/current_assets_field"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/save_button_assets"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        style="@style/Widget.Material3.Button.OutlinedButton"
+        android:layout_alignParentBottom="true"
+        android:textSize="20sp"
+        android:layout_marginBottom="10dp"
+        android:text="Done"
+        android:fontFamily="@font/open_sans_bold"
+        app:strokeColor="@color/app_primary"
+        app:strokeWidth="2.5dp"/>
+
+</RelativeLayout>

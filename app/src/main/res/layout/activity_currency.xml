@@ -17,32 +17,16 @@
         android:layout_marginTop="20dp"
         android:textColor="@color/app_primary"/>
 
-    <RelativeLayout
-        android:id="@+id/currency_item"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_below="@id/currency_title">
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="100dp"/>
-
-    </RelativeLayout>
-
-    <SearchView
-        android:id="@+id/currency_searchbar"
-        android:layout_width="match_parent"
-        android:layout_height="65dp"
-        android:layout_marginTop="20dp"
-        android:layout_below="@id/currency_item"
-         />
 
     <ListView
         android:id="@+id/currency_list"
         android:layout_width="match_parent"
-        android:layout_height="440dp"
-        android:layout_marginTop="20dp"
-        android:layout_below="@id/currency_searchbar"/>
+        android:layout_height="match_parent"
+        android:layout_above="@+id/next_button_currency"
+        android:layout_below="@id/currency_title"
+        android:divider="@color/app_primary"
+        android:layout_marginVertical="33dp"
+        android:dividerHeight="1dp"/>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/next_button_currency"

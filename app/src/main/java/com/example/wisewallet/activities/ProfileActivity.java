@@ -12,7 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.wisewallet.R;
-import com.example.wisewallet.authentication.IsAuthenticated;
+import com.example.wisewallet.firebaseHandeling.FirebaseOperationsManager;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
@@ -25,22 +25,15 @@ public class ProfileActivity extends AppCompatActivity {
     final FirebaseAuth userAuth = FirebaseAuth.getInstance();
     FirebaseUser firebaseUser = userAuth.getCurrentUser();
 
-    @Override
-    protected void onResume() {
-        super.onResume();
 
-        IsAuthenticated isAuthenticated = new IsAuthenticated(this);
-        boolean isUserAuthenticated = isAuthenticated.checkAuthentication();
-
-        if (!isUserAuthenticated) {
-            isAuthenticated.redirectToLoginScreen();
-            finish();
-        }
-    }
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        //Check Authentication Status
+        FirebaseOperationsManager firebaseOperationsManager = FirebaseOperationsManager.getInstance();
+        firebaseOperationsManager.checkAuthentication(ProfileActivity.this);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
