@@ -20,9 +20,12 @@ import com.example.wisewallet.R;
 import com.example.wisewallet.TransactionHandeling.Transaction;
 import com.example.wisewallet.firebaseHandeling.FirebaseOperationsManager;
 import com.google.android.material.button.MaterialButton;
-import com.google.firebase.auth.FirebaseAuth;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
+import java.util.Date;
 
 public class NavAddActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
 
@@ -56,9 +59,14 @@ public class NavAddActivity extends AppCompatActivity implements AdapterView.OnI
         incomeButton.setOnClickListener(incomeButtonListener);
         expensesButton.setOnClickListener(expensesButtonListener);
         doneButton.setOnClickListener(doneButtonListener);
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        Date currentDate = new Date();
+        String formattedDate = dateFormat.format(currentDate);
 
         date = (EditText)findViewById(R.id.transaction_date_input);
         date.addTextChangedListener(tw);
+        date.setText(formattedDate);
+
 
         Spinner spinner = findViewById(R.id.transaction_catagory_spinner);
         ArrayAdapter<CharSequence> arrayAdapter = ArrayAdapter.createFromResource(this, R.array.categories, android.R.layout.simple_spinner_item);
@@ -77,11 +85,14 @@ public class NavAddActivity extends AppCompatActivity implements AdapterView.OnI
                 EditText name = findViewById(R.id.transaction_name_input);
                 EditText amount = findViewById(R.id.transaction_amount_input);
                 EditText date = findViewById(R.id.transaction_date_input);
-                String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
                 Context context = getApplicationContext();
+                LocalDateTime now = LocalDateTime.now();
 
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
 
-                Transaction transaction = new Transaction(userId, transactionType, name.getText().toString().toLowerCase(), amount.getText().toString(), date.getText().toString(), categoryName.toLowerCase(), context);
+                String formattedDateTime = now.format(formatter);
+
+                Transaction transaction = new Transaction(firebaseOperationsManager.getUserId(NavAddActivity.this), transactionType, name.getText().toString().toLowerCase(), amount.getText().toString(), date.getText().toString(), categoryName.toLowerCase(), formattedDateTime, context);
                 String transactionID = transaction.firebaseTransactionSubmission();
 
                 Toast.makeText(context, transactionID, Toast.LENGTH_SHORT).show();

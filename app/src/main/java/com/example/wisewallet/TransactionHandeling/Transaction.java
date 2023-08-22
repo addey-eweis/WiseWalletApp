@@ -22,6 +22,7 @@ public class Transaction {
     private String transactionAmount;
     private String transactionDate;
     private String transactionCategory;
+    private String realDate;
     private FirebaseFirestore firestoreDb;
     private Context context;
     private String total;
@@ -29,13 +30,14 @@ public class Transaction {
     public Transaction() {
     }
 
-    public Transaction(String userId, String transactionType, String transactionName, String transactionAmount, String transactionDate, String transactionCategory, Context context) {
+    public Transaction(String userId, String transactionType, String transactionName, String transactionAmount, String transactionDate, String transactionCategory, String realDate, Context context) {
         this.userId = userId;
         this.transactionType = transactionType;
         this.transactionName = transactionName;
         this.transactionAmount = transactionAmount;
         this.transactionDate = transactionDate;
         this.transactionCategory = transactionCategory;
+        this.realDate = realDate;
         this.firestoreDb = FirebaseFirestore.getInstance(); // Initialize the firestoreDb field
         this.context = context;
     }
@@ -48,6 +50,7 @@ public class Transaction {
         transactionData.put("transactionAmount", transactionAmount);
         transactionData.put("transactionDate", transactionDate);
         transactionData.put("transactionCatagory", transactionCategory);
+        transactionData.put("realDate", realDate);
 
         return transactionData;
     }
@@ -65,11 +68,11 @@ public class Transaction {
                     totalDocument.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                         @Override
                         public void onSuccess(DocumentSnapshot documentSnapshot) {
-                            total = documentSnapshot.getString("total");
+                            total = documentSnapshot.getString("totalIncome");
                             Map<String, Object> totalHashmap = new HashMap<>();
 
                             if (total != null && transactionAmount != null) {
-                                totalHashmap.put("total", String.valueOf(Integer.parseInt(total) + Integer.parseInt(transactionAmount)));
+                                totalHashmap.put("totalIncome", String.valueOf(Integer.parseInt(total) + Integer.parseInt(transactionAmount)));
                             }
 
                             FirebaseOperationsManager.getInstance().submitToFirebase(context, totalDocument, totalHashmap, new FirebaseOperationsManager.FirebaseSubmitCallback() {
@@ -89,11 +92,11 @@ public class Transaction {
                     totalDocument.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                         @Override
                         public void onSuccess(DocumentSnapshot documentSnapshot) {
-                            total = documentSnapshot.getString("total");
+                            total = documentSnapshot.getString("totalExpenses");
                             Map<String, Object> totalHashmap = new HashMap<>();
 
                             if (total != null) {
-                                totalHashmap.put("total", String.valueOf(Integer.parseInt(total) - Integer.parseInt(transactionAmount)));
+                                totalHashmap.put("totalExpenses", String.valueOf(Integer.parseInt(total) + Integer.parseInt(transactionAmount)));
                             }
 
                             FirebaseOperationsManager.getInstance().submitToFirebase(context, totalDocument, totalHashmap, new FirebaseOperationsManager.FirebaseSubmitCallback() {
