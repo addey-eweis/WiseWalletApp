@@ -14,7 +14,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.wisewallet.R;
 import com.example.wisewallet.firebaseHandeling.FirebaseOperationsManager;
-import com.example.wisewallet.fragments.AnalyticsFragment;
+import com.example.wisewallet.fragments.BudgetFragment;
 import com.example.wisewallet.fragments.RecentFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
@@ -153,7 +153,7 @@ public class MainActivity extends AppCompatActivity {
                             selectedFragment = new RecentFragment();
                             break;
                         case R.id.nav_analytics:
-                            selectedFragment = new AnalyticsFragment();
+                            selectedFragment = new BudgetFragment();
                             break;
                         case R.id.nav_add:
                             Intent addIntent = new Intent(getApplicationContext(), NavAddActivity.class);

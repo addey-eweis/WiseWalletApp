@@ -23,6 +23,9 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -85,10 +88,14 @@ public class BudgetActivity extends AppCompatActivity implements AdapterView.OnI
                         Toast.makeText(BudgetActivity.this, "Please Enter budget fields", Toast.LENGTH_SHORT).show();
 
                     } else if ((!TextUtils.isEmpty(limitAmount.getText()) | !period.equals("Select Budget Period")) & (TextUtils.isEmpty(goalAmount.getText()) & TextUtils.isEmpty(goalName.getText()))) {
+                        Date date = new Date();
+                        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+
                         Toast.makeText(BudgetActivity.this, "Goal Not Set", Toast.LENGTH_SHORT).show();
                         budgetAndGoals.put("budgetPeriod", period);
                         budgetAndGoals.put("budgetLimit", limitAmount.getText().toString());
                         budgetAndGoals.put("type", "budgetOnly");
+                        budgetAndGoals.put("date", formatter.format(date));
                         budgetAndGoalsPath.set(budgetAndGoals).addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
@@ -110,6 +117,7 @@ public class BudgetActivity extends AppCompatActivity implements AdapterView.OnI
                         budgetAndGoals.put("goalName", goalName.getText().toString());
                         budgetAndGoals.put("goalAmount", goalAmount.getText().toString());
                         budgetAndGoals.put("type", "budget&goal");
+                        budgetAndGoals.put("date",  LocalDateTime.now());
                         budgetAndGoalsPath.set(budgetAndGoals).addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
