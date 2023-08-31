@@ -1,6 +1,7 @@
 package com.example.wisewallet.fragments;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,9 +26,11 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.time.Duration;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -69,7 +72,7 @@ public class BudgetFragment extends Fragment {
                             String goalPrice = document.getString("goalAmount");
                             String budgetAmount = document.getString("budgetLimit");
                             String budgetPeriod = document.getString("budgetPeriod");
-                            String savedUpAmount = document.getString("savedUp");
+                            String savedUpAmount = document.getString("savedUpAmount");
 //                            String savedUpAmount = "0";
 //                            String date = document.getString("date");
 
@@ -77,6 +80,7 @@ public class BudgetFragment extends Fragment {
 //                            String type = document.getString("type");
                             //Insert Type later for either view-holder, one with goal or one without
                             budgetGoalItem = new BudgetGoalItem(goalName,budgetAmount, Currency, savedUpAmount, goalPrice, budgetPeriod, expectedDate(goalPrice, budgetAmount, budgetPeriod));
+
                             budgetGoalItems.add(budgetGoalItem);
 
                             BudgetRvAdapter adapter = new BudgetRvAdapter(getContext(), budgetGoalItems);
@@ -93,19 +97,45 @@ public class BudgetFragment extends Fragment {
     }
 
 
-    public Double firestoreSavedUpAmount(){
+    public void calculateSavedUpAmount(String passedBudgetLimit, float frequency){
         System.out.println("SavedUpAmount");
-        DocumentReference inflowsRef = FirebaseFirestore.getInstance().collection("users").document(firebaseOperationsManager.getUserId(getContext()));
-        firebaseOperationsManager.readFromFirebase(getContext(), inflowsRef, new FirebaseOperationsManager.FirebaseReadCallback() {
+        DocumentReference firebaseObj = FirebaseFirestore.getInstance().collection("users").document(firebaseOperationsManager.getUserId(getContext()));
+        Log.d("thisDoc", "onDataRead: " + firebaseObj);
+        firebaseOperationsManager.readFromFirebase(getContext(), firebaseObj, new FirebaseOperationsManager.FirebaseReadCallback() {
             @Override
             public void onDataRead(Map<String, Object> dataMap) {
+                double totalIncome = Double.parseDouble(String.valueOf(dataMap.get("totalIncome")));
+                double budgetLimit = Double.parseDouble(passedBudgetLimit);
+                Log.d("dataMap", String.valueOf(dataMap));
 
-                Object totalIncome = dataMap.get("totalIncome");
-                System.out.println("document: " + inflowsRef);
+                //Subtract from totalIncome Daily and add to savedUpAmount daily
+                double savedUpAmount = totalIncome - budgetLimit;
+                Log.d("savedUpAmount", String.valueOf(savedUpAmount));
 
+                ///Total Amount To Deduct For The Whole Period
+                double totalAmountToDeductForTheWholePeriod = savedUpAmount * frequency;
+
+
+                /*******************   Ask if it should all be deducted at once. *******************
+                 Or to be deducted every X days  / X weeks or X years.
+                 *****************************************************************************************/
+
+                 //LocalDate todaysDate = LocalDate.now();
+                //LocalDate endDate = LocalDate.
+                //Duration duration = Duration.between(todaysDate, endDate);
+                /****
+                 * Every X days or months or years
+                while(budgetLimit > savedUpAmount){
+                    double dailyAmountToDeduct = days * savedUpAmount;
+                }
+                 */
+                /*****************************************************************************************/
+
+                //submit to firebase
+                //firebaseOperationsManager.submitToFirebase();
             }
         });
-        return 0.0;
+
     }
 
 
@@ -118,22 +148,23 @@ public class BudgetFragment extends Fragment {
                 case "Daily":
                     days = Float.parseFloat(goalPrice) / parsedBudgetAmount;
                     //Subtract from inflows Daily
-                    firestoreSavedUpAmount();
-
+                    calculateSavedUpAmount(budgetAmount,  days);
 
                     break;
                 case "Weekly":
                     days = Float.parseFloat(goalPrice) / (parsedBudgetAmount / 7);
                     //Subtract from inflows Weekly
+                    calculateSavedUpAmount(budgetAmount,  days);
                     break;
                 case "Monthly":
                     days = Float.parseFloat(goalPrice) / (parsedBudgetAmount / 30);
                     //Subtract from inflows Monthly
-
+                    calculateSavedUpAmount(budgetAmount,  days);
                     break;
                 case "Yearly":
                     days = Float.parseFloat(goalPrice) / (parsedBudgetAmount / 365);
                     //Subtract from inflows Yearly
+                    calculateSavedUpAmount(budgetAmount,  days);
 
                     break;
             }
