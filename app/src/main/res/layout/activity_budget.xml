@@ -39,7 +39,7 @@
         android:id="@+id/budget_limit_amount_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Limit Amount"
+        android:text="Budget Amount"
         android:layout_below="@id/budget_period_spinner"
         android:textColor="@color/app_foreground"
         android:fontFamily="@font/open_sans_semibold"

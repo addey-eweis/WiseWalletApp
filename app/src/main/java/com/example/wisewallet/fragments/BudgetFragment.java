@@ -18,6 +18,7 @@ import com.example.wisewallet.recyclerView.DAO.BudgetGoalItem;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -28,6 +29,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class BudgetFragment extends Fragment {
     FirebaseOperationsManager firebaseOperationsManager = FirebaseOperationsManager.getInstance();
@@ -67,14 +69,14 @@ public class BudgetFragment extends Fragment {
                             String goalPrice = document.getString("goalAmount");
                             String budgetAmount = document.getString("budgetLimit");
                             String budgetPeriod = document.getString("budgetPeriod");
-//                            String savedUpAmount = document.getString("savedUp");
+                            String savedUpAmount = document.getString("savedUp");
 //                            String savedUpAmount = "0";
 //                            String date = document.getString("date");
 
 
 //                            String type = document.getString("type");
                             //Insert Type later for either view-holder, one with goal or one without
-                            budgetGoalItem = new BudgetGoalItem(goalName,budgetAmount, Currency, "savedUpAmount()", goalPrice, budgetPeriod, expectedDate(goalPrice, budgetAmount, budgetPeriod));
+                            budgetGoalItem = new BudgetGoalItem(goalName,budgetAmount, Currency, savedUpAmount, goalPrice, budgetPeriod, expectedDate(goalPrice, budgetAmount, budgetPeriod));
                             budgetGoalItems.add(budgetGoalItem);
 
                             BudgetRvAdapter adapter = new BudgetRvAdapter(getContext(), budgetGoalItems);
@@ -91,6 +93,21 @@ public class BudgetFragment extends Fragment {
     }
 
 
+    public Double firestoreSavedUpAmount(){
+        System.out.println("SavedUpAmount");
+        DocumentReference inflowsRef = FirebaseFirestore.getInstance().collection("users").document(firebaseOperationsManager.getUserId(getContext()));
+        firebaseOperationsManager.readFromFirebase(getContext(), inflowsRef, new FirebaseOperationsManager.FirebaseReadCallback() {
+            @Override
+            public void onDataRead(Map<String, Object> dataMap) {
+
+                Object totalIncome = dataMap.get("totalIncome");
+                System.out.println("document: " + inflowsRef);
+
+            }
+        });
+        return 0.0;
+    }
+
 
     private String expectedDate(String goalPrice, String budgetAmount, String budgetPeriod){
         float days = 0;
@@ -100,15 +117,24 @@ public class BudgetFragment extends Fragment {
             switch (budgetPeriod) {
                 case "Daily":
                     days = Float.parseFloat(goalPrice) / parsedBudgetAmount;
+                    //Subtract from inflows Daily
+                    firestoreSavedUpAmount();
+
+
                     break;
                 case "Weekly":
                     days = Float.parseFloat(goalPrice) / (parsedBudgetAmount / 7);
+                    //Subtract from inflows Weekly
                     break;
                 case "Monthly":
                     days = Float.parseFloat(goalPrice) / (parsedBudgetAmount / 30);
+                    //Subtract from inflows Monthly
+
                     break;
                 case "Yearly":
-                    days = Float.parseFloat(goalPrice) / (parsedBudgetAmount / 360);
+                    days = Float.parseFloat(goalPrice) / (parsedBudgetAmount / 365);
+                    //Subtract from inflows Yearly
+
                     break;
             }
         }

@@ -93,10 +93,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.wisewallet.R;
 import com.example.wisewallet.recyclerView.DAO.BudgetGoalItem;
+import com.example.wisewallet.recyclerView.RecentRvViewholder.BudgetGoalViewholder;
 
 import java.util.List;
 
-public class BudgetRvAdapter extends RecyclerView.Adapter<BudgetRvAdapter.MyViewHolder> {
+public class BudgetRvAdapter extends RecyclerView.Adapter<BudgetGoalViewholder> {
     Context context;
     List<BudgetGoalItem> budgetGoalItemsList;
 
@@ -108,15 +109,15 @@ public class BudgetRvAdapter extends RecyclerView.Adapter<BudgetRvAdapter.MyView
 
     @NonNull
     @Override
-    public BudgetRvAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public BudgetGoalViewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(context);
         View view = layoutInflater.inflate(R.layout.budget_goal_item, parent, false);
 
-        return new BudgetRvAdapter.MyViewHolder(view);
+        return new BudgetGoalViewholder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull BudgetRvAdapter.MyViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull BudgetGoalViewholder holder, int position) {
         holder.goalName.setText(budgetGoalItemsList.get(position).getGoalName());
         holder.budgetAmount.setText(budgetGoalItemsList.get(position).getBudgetAmount());
         holder.currencyOne.setText(budgetGoalItemsList.get(position).getCurrency());
@@ -135,21 +136,5 @@ public class BudgetRvAdapter extends RecyclerView.Adapter<BudgetRvAdapter.MyView
         return budgetGoalItemsList.size();
     }
 
-    public static class MyViewHolder extends RecyclerView.ViewHolder{
-        TextView goalName, budgetAmount, savedUp, goalAmount, budgetPeriod, currencyOne, currencyTwo, currencyThree, expectedDate;
-        public MyViewHolder(@NonNull View itemView) {
-            super(itemView);
 
-            goalName = itemView.findViewById(R.id.item_name);
-            budgetAmount = itemView.findViewById(R.id.budget_goal_fragment_amount);
-            currencyOne = itemView.findViewById(R.id.budget_goal_fragment_currency_1);
-            savedUp = itemView.findViewById(R.id.amount_saved_up);
-            currencyTwo = itemView.findViewById(R.id.budget_goal_fragment_currency_2);
-            goalAmount = itemView.findViewById(R.id.goal_amount);
-            currencyThree = itemView.findViewById(R.id.budget_goal_fragment_currency_3);
-            budgetPeriod = itemView.findViewById(R.id.budget_period);
-            expectedDate = itemView.findViewById(R.id.expected_date_actual);
-
-        }
-    }
 }
