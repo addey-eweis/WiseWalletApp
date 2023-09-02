@@ -128,6 +128,7 @@ public class BudgetActivity extends AppCompatActivity implements AdapterView.OnI
                             public void onComplete(@NonNull Task<Void> task) {
                                 if(task.isSuccessful()){
                                     Toast.makeText(BudgetActivity.this, "Budget & Goal Set Successfully", Toast.LENGTH_SHORT).show();
+
                                     finish();
                                 }
                             }
