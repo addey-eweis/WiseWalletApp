@@ -202,20 +202,21 @@ public class BudgetFragment extends Fragment {
                                 int savedUpAmount = ((daysFromLastDeduction) * Integer.parseInt(budgetAmount));
                                 calculateSavedUpAmount(budgetAmount,  days, budgetDocumentId, String.valueOf(savedUpAmount));
                             }
-                            else{
-//                        calculateSavedUpAmount(budgetAmount,  days, budgetDocumentId, savedUpAmount);
-
-
-                            }
+//                            else{
+////                        calculateSavedUpAmount(budgetAmount,  days, budgetDocumentId, savedUpAmount);
+//
+//
+//                            }
 
                             break;
                         case "Weekly":
+                            Log.d("addet", "onDataRead: " + budgetAmount);
                             days = Float.parseFloat(goalPrice) / (parsedBudgetAmount / 7);
                             //Subtract from inflows Weekly
+                                Log.d("savedUpAmountOld", "onDataRead: " + savedUpAmountOld);
                             if(daysFromLastDeduction > 7){
 //                                int savedUpAmount = ((daysFromLastDeduction/7) * Integer.parseInt(budgetAmount)) + Integer.parseInt(savedUpAmountOld);
                                 int savedUpAmount = (daysFromLastDeduction/7) * Integer.parseInt(budgetAmount);
-                                Log.d("savedUpAmountOld", "onDataRead: " + savedUpAmountOld);
                                 // add original saved up amount to new
                                 calculateSavedUpAmount(budgetAmount,  days, budgetDocumentId, String.valueOf(savedUpAmount + Integer.parseInt(savedUpAmountOld)));
                             }
