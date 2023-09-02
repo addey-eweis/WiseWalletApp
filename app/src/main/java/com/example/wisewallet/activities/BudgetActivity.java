@@ -24,6 +24,7 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.HashMap;
@@ -122,7 +123,8 @@ public class BudgetActivity extends AppCompatActivity implements AdapterView.OnI
                         budgetAndGoals.put("goalAmount", goalAmount.getText().toString());
                         budgetAndGoals.put("savedUpAmount", "0");
                         budgetAndGoals.put("type", "budget&goal");
-                        budgetAndGoals.put("date",  LocalDateTime.now());
+                        budgetAndGoals.put("date", LocalDate.now().toString());
+                        budgetAndGoals.put("daysFromLastDeduction", "0");
                         budgetAndGoalsPath.set(budgetAndGoals).addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
