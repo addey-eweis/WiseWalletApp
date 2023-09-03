@@ -45,7 +45,8 @@ public class ProfileActivity extends AppCompatActivity {
 
         TextView profileName = findViewById(R.id.profile_profileName);
         TextView userName = findViewById(R.id.profile_name_changeable);
-        profileName.setText(firebaseUser.getDisplayName());
+        String profileNameProfile = "Hi " + firebaseUser.getDisplayName() +"!";
+        profileName.setText(profileNameProfile);
         userName.setText(firebaseUser.getDisplayName());
 
         TextView email = findViewById(R.id.profile_email_changeable);
