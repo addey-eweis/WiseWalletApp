@@ -69,7 +69,7 @@ public class AssetsActivity extends AppCompatActivity {
                         firebaseOperationsManager.submitToFirebase(AssetsActivity.this, currentAssetsReference, assets, new FirebaseOperationsManager.FirebaseSubmitCallback() {
                             @Override
                             public void onSubmitSuccess() {
-                                Toast.makeText(getApplicationContext(), "Welcome to ", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getApplicationContext(), "Welcome to Wise Wallet!", Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(AssetsActivity.this, MainActivity.class);
                                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                                 startActivity(intent);
