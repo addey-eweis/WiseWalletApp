@@ -83,13 +83,11 @@ public class BudgetFragment extends Fragment {
                             String budgetAmount = document.getString("budgetLimit");
                             String budgetPeriod = document.getString("budgetPeriod");
                             String savedUpAmount = document.getString("savedUpAmount");
-//                            String savedUpAmount = "0";
-//                            String date = document.getString("date");
+                            String date = document.getString("dateActual");
 
 
-//                            String type = document.getString("type");
                             //Insert Type later for either view-holder, one with goal or one without
-                            budgetGoalItem = new BudgetGoalItem(goalName,budgetAmount, Currency, savedUpAmount, goalPrice, budgetPeriod, expectedDate(goalPrice, budgetAmount, budgetPeriod, document.getId(), "2023-09-01", savedUpAmount));
+                            budgetGoalItem = new BudgetGoalItem(goalName,budgetAmount, Currency, savedUpAmount, goalPrice, budgetPeriod, expectedDate(goalPrice, budgetAmount, budgetPeriod, document.getId(), date, savedUpAmount));
 
                             budgetGoalItems.add(budgetGoalItem);
 

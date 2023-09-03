@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <vector
+            android:width="500dp"
+            android:height="500dp"
+            android:viewportWidth="500"
+            android:viewportHeight="500">
+            <path
+                android:pathData="M398.8,426.4H101.2v-76.3l104.4,-106.2l-104.4,-97.3V73.6h292.1v75.8H218.8l103.5,94.4L218.8,346.5h180V426.4z"
+                android:fillColor="#FFFFFF"
+                />
+        </vector>
+        <shape android:shape="oval">
+            <solid android:color="@color/app_primary"/>
+        </shape>
+    </item>
+</layer-list>

@@ -44,8 +44,7 @@
                 android:layout_height="40dp"
                 android:layout_alignParentEnd="true"
                 android:layout_centerInParent="true"
-                android:background="@drawable/button_landing_profile"
-                />
+                android:background="@drawable/button_landing_profile" />
 
         </RelativeLayout>
 
@@ -60,19 +59,21 @@
 
             <Button
                 android:id="@+id/toggleButton"
-                android:layout_width="300dp"
+                android:layout_width="294dp"
+                android:layout_alignStart="@id/showTotalBtn"
                 android:layout_alignParentStart="true"
                 android:layout_height="60dp"
                 android:text="Remaining Balance"
                 android:fontFamily="@font/open_sans_bold"
-                android:textSize="15dp"
+                android:textSize="15sp"
                 android:background="@drawable/sign_in_button"
                 />
             <Button
                 android:id="@+id/showTotalBtn"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:layout_toRightOf="@id/toggleButton"
+                android:layout_width="54dp"
+                android:layout_alignParentEnd="true"
+                android:layout_height="54dp"
+                android:background="@drawable/total_button"
                 />
 
                 <RelativeLayout

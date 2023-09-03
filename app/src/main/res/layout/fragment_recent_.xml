@@ -13,7 +13,7 @@
         android:fontFamily="@font/open_sans_extrabold"
         android:textColor="@color/app_primary"
         android:textSize="20sp"
-        android:layout_marginLeft="30dp"
+        android:layout_marginStart="30dp"
         android:layout_marginTop="50dp"/>
 
     <androidx.recyclerview.widget.RecyclerView
