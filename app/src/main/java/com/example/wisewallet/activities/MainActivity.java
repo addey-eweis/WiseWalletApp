@@ -6,6 +6,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -25,6 +26,8 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.ListenerRegistration;
 
+import java.util.Map;
+
 public class MainActivity extends AppCompatActivity {
     Fragment selectedFragment = new Fragment();
     private ListenerRegistration totalIncomeListenerRegistration;
@@ -33,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
     FirebaseOperationsManager firebaseOperationsManager = FirebaseOperationsManager.getInstance();
     //Get UserId
     String userId = firebaseOperationsManager.getUserId(MainActivity.this);
-
+    TextView balance;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +64,9 @@ public class MainActivity extends AppCompatActivity {
         Button toggleBalanceButton = findViewById(R.id.toggleButton);
         toggleBalanceButton.setOnClickListener(toggleButtonListener);
 
+
+        Button showTotalBtn = findViewById(R.id.showTotalBtn);
+        showTotalBtn.setOnClickListener(showTotalBtnClickListener);
         firebaseOperationsManager.getCurrency(MainActivity.this, new FirebaseOperationsManager.FirebaseCurrencyCallback() {
             @Override
             public void onCurrencyRead(String currency) {
@@ -89,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
     private void setupAndShowValues() {
         DocumentReference totalDocument = FirebaseFirestore.getInstance().collection("users").document(userId);
 
-        TextView balance = findViewById(R.id.balance_landing);
+        balance = findViewById(R.id.balance_landing);
         Button button = findViewById(R.id.toggleButton);
 
         totalIncomeListenerRegistration = totalDocument.addSnapshotListener(new EventListener<DocumentSnapshot>() {
@@ -129,6 +135,28 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    public View.OnClickListener showTotalBtnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            TextView balance = findViewById(R.id.balance_landing);
+            firebaseOperationsManager.readFromFirebase(getApplicationContext(), FirebaseFirestore.getInstance().collection("users").document(firebaseOperationsManager.getUserId(getApplicationContext())), new FirebaseOperationsManager.FirebaseReadCallback() {
+                @Override
+                public void onDataRead(Map<String, Object> dataMap) {
+                    Object totalIncome = dataMap.get("totalIncome");
+                    Object totalExpense = dataMap.get("totalExpenses");
+                    if(totalIncome == null || totalExpense == null){
+                        Toast.makeText(getApplicationContext(), "Null Income / Null Expense", Toast.LENGTH_LONG);
+                    }
+
+                    Object totalRevenue = Integer.parseInt(totalIncome.toString()) - Integer.parseInt(totalExpense.toString());
+                    balance.setText(totalRevenue.toString());
+
+                }
+            });
+
+
+        }
+    };
 
     private final View.OnClickListener profileButtonListener =
             new View.OnClickListener() {

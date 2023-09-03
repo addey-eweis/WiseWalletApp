@@ -34,6 +34,8 @@
         android:textSize="15sp"
         android:fontFamily="@font/open_sans_bold"
         android:textColor="@color/app_primary"/>
+
+
     <TextView
         android:id="@+id/amount_saved_up"
         android:layout_width="wrap_content"
@@ -42,6 +44,8 @@
         android:text="100"
         android:textSize="15sp"
         android:fontFamily="@font/open_sans_semibold"/>
+
+
     <TextView
         android:id="@+id/budget_goal_fragment_currency_2"
         android:layout_width="wrap_content"

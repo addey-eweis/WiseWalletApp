@@ -24,6 +24,7 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.HashMap;
@@ -87,7 +88,8 @@ public class BudgetActivity extends AppCompatActivity implements AdapterView.OnI
                     if((TextUtils.isEmpty(limitAmount.getText()) | limitAmount.getText().equals("0")) | period.equals("Select Budget Period")){
                         Toast.makeText(BudgetActivity.this, "Please Enter budget fields", Toast.LENGTH_SHORT).show();
 
-                    } else if ((!TextUtils.isEmpty(limitAmount.getText()) | !period.equals("Select Budget Period")) & (TextUtils.isEmpty(goalAmount.getText()) & TextUtils.isEmpty(goalName.getText()))) {
+                    }
+                    else if ((!TextUtils.isEmpty(limitAmount.getText()) | !period.equals("Select Budget Period")) & (TextUtils.isEmpty(goalAmount.getText()) & TextUtils.isEmpty(goalName.getText()))) {
                         Date date = new Date();
                         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
 
@@ -95,7 +97,9 @@ public class BudgetActivity extends AppCompatActivity implements AdapterView.OnI
                         budgetAndGoals.put("budgetPeriod", period);
                         budgetAndGoals.put("budgetLimit", limitAmount.getText().toString());
                         budgetAndGoals.put("type", "budgetOnly");
+                        budgetAndGoals.put("savedUpAmount", "0");
                         budgetAndGoals.put("date", formatter.format(date));
+
                         budgetAndGoalsPath.set(budgetAndGoals).addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
@@ -111,18 +115,22 @@ public class BudgetActivity extends AppCompatActivity implements AdapterView.OnI
                             }
                         });
 
-                    }else if ((!TextUtils.isEmpty(limitAmount.getText()) | !period.equals("Select Budget Period")) & (!TextUtils.isEmpty(goalAmount.getText()) & !TextUtils.isEmpty(goalName.getText()))){
+                    }
+                    else if ((!TextUtils.isEmpty(limitAmount.getText()) | !period.equals("Select Budget Period")) & (!TextUtils.isEmpty(goalAmount.getText()) & !TextUtils.isEmpty(goalName.getText()))){
                         budgetAndGoals.put("budgetPeriod", period);
                         budgetAndGoals.put("budgetLimit", limitAmount.getText().toString());
                         budgetAndGoals.put("goalName", goalName.getText().toString());
                         budgetAndGoals.put("goalAmount", goalAmount.getText().toString());
+                        budgetAndGoals.put("savedUpAmount", "0");
                         budgetAndGoals.put("type", "budget&goal");
-                        budgetAndGoals.put("date",  LocalDateTime.now());
+                        budgetAndGoals.put("date", LocalDate.now().toString());
+                        budgetAndGoals.put("daysFromLastDeduction", "0");
                         budgetAndGoalsPath.set(budgetAndGoals).addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
                                 if(task.isSuccessful()){
                                     Toast.makeText(BudgetActivity.this, "Budget & Goal Set Successfully", Toast.LENGTH_SHORT).show();
+
                                     finish();
                                 }
                             }
