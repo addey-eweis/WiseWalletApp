@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         /**** Check for internet */
 
-        if(!(internetBroadcastReceiver.isNetworkAvailable(getApplicationContext()))){
+        if(!(internetBroadcastReceiver.isNetworkAvailable(getApplicationContext(), getIntent()))){
             setContentView(R.layout.activity_no_internet_connection);
         }
 

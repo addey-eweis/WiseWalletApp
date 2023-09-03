@@ -11,11 +11,11 @@ public class InternetBroadcastReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent){
-        isNetworkAvailable(context);
+        isNetworkAvailable(context, intent);
 
     }
 
-    public boolean isNetworkAvailable(Context context){
+    public boolean isNetworkAvailable(Context context, Intent intent){
         ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetworkInfo = (connectivityManager != null) ? connectivityManager.getActiveNetworkInfo() : null;
 
