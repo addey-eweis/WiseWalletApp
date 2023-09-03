@@ -1,6 +1,9 @@
 package com.example.wisewallet.activities;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -14,6 +17,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import com.example.wisewallet.R;
+import com.example.wisewallet.broadcastReceivers.InternetBroadcastReceiver;
 import com.example.wisewallet.firebaseHandeling.FirebaseOperationsManager;
 import com.example.wisewallet.fragments.BudgetFragment;
 import com.example.wisewallet.fragments.RecentFragment;
@@ -37,9 +41,21 @@ public class MainActivity extends AppCompatActivity {
     //Get UserId
     String userId = firebaseOperationsManager.getUserId(MainActivity.this);
     TextView balance;
+    InternetBroadcastReceiver internetBroadcastReceiver = new InternetBroadcastReceiver();
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        /**** Check for internet */
+
+        if(!(internetBroadcastReceiver.isNetworkAvailable(getApplicationContext()))){
+            setContentView(R.layout.activity_no_internet_connection);
+        }
+
+
+
+
         //Check Authentication Status
         FirebaseOperationsManager firebaseOperationsManager = FirebaseOperationsManager.getInstance();
         firebaseOperationsManager.checkAuthentication(MainActivity.this);
@@ -75,6 +91,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+
 
 
 

@@ -8,6 +8,7 @@
     <string name="nav_recent">Activity</string>
     <string name="sign_in"><u>Sign In</u></string>
     <string name="amount_landing">0</string>
+    <string name="no_internet_connection">No Internet Connection</string>
 
     <string-array name="categories">
         <item>Select a Category</item>
